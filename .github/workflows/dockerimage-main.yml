@@ -63,7 +63,7 @@ jobs:
           platforms: ${{ matrix.platform }}
           push: ${{ github.event_name == 'release' }}
           tags: |
-            dungfu/twitch-drops-miner:temp-${{ matrix.arch }}-${{ github.run_id }}
+            fresilt/tdrop-auto-custom:temp-${{ matrix.arch }}-${{ github.run_id }}
           pull: true
           no-cache: true
 
@@ -103,22 +103,22 @@ jobs:
           TEMP_TAGS=()
 
           for arch in "${ARCHS[@]}"; do
-            TEMP_TAGS+=("dungfu/twitch-drops-miner:temp-${arch}-${{ github.run_id }}")
+            TEMP_TAGS+=("fresilt/tdrop-auto-custom:temp-${arch}-${{ github.run_id }}")
           done
 
           # Create version tag
           docker buildx imagetools create \
-            -t dungfu/twitch-drops-miner:${{ steps.version.outputs.version }} \
+            -t fresilt/tdrop-auto-custom:${{ steps.version.outputs.version }} \
             "${TEMP_TAGS[@]}"
 
           # Create dev tag
           docker buildx imagetools create \
-            -t dungfu/twitch-drops-miner:16.dev \
+            -t fresilt/tdrop-auto-custom:16.dev \
             "${TEMP_TAGS[@]}"
 
           # Create latest tag
           docker buildx imagetools create \
-            -t dungfu/twitch-drops-miner:latest \
+            -t fresilt/tdrop-auto-custom:latest \
             "${TEMP_TAGS[@]}"
 
       - name: Clean up temp tags
@@ -130,7 +130,7 @@ jobs:
           for arch in "${ARCHS[@]}"; do
             curl -X DELETE \
               -H "Authorization: JWT $TOKEN" \
-              "https://hub.docker.com/v2/repositories/dungfu/twitch-drops-miner/tags/temp-${arch}-${{ github.run_id }}/"
+              "https://hub.docker.com/v2/repositories/fresilt/tdrop-auto-custom/tags/temp-${arch}-${{ github.run_id }}/"
           done
 
       - name: Update Docker Hub README
@@ -138,5 +138,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_NAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-          repository: dungfu/twitch-drops-miner
+          repository: fresilt/tdrop-auto-custom
           readme-filepath: ./README.md
