@@ -82,7 +82,7 @@ jobs:
 
             Reference commit: https://github.com/kLandor4/TwitchDropsMiner/commit/${{ steps.get-release.outputs.full_commit_hash }}
 
-            Docker image at: https://hub.docker.com/r/dungfu/twitch-drops-miner
+            Docker image at: https://hub.docker.com/r/fresitl/tdrop-auto-custom
           draft: false
           prerelease: false
           token: ${{ secrets.PAT_TOKEN }}
