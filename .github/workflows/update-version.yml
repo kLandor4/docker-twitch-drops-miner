@@ -25,7 +25,7 @@ jobs:
 
           while [ $attempt -le $max_attempts ]; do
             # Get the latest dev-build release info
-            release_info=$(curl -s "https://api.github.com/repos/fireph/TwitchDropsMiner/releases/tags/dev-build")
+            release_info=$(curl -s "https://api.github.com/repos/kLandor4/TwitchDropsMiner/releases/tags/dev-build")
 
             # Extract commit hash from "Reference commit: xxxxx" in body using capture group
             commit_hash=$(echo "$release_info" | jq -r '.body' | sed -n 's/.*Reference commit: \([a-f0-9]\+\).*/\1/p')
@@ -99,14 +99,14 @@ jobs:
           prev_commit="${prev_commit##*.}"
           new_commit="${{ steps.get-release.outputs.full_commit_hash }}"
 
-          echo "Comparing $prev_commit...$new_commit in fireph/TwitchDropsMiner"
+          echo "Comparing $prev_commit...$new_commit in kLandor4/TwitchDropsMiner"
 
           compare_info=$(curl -s \
             -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
-            "https://api.github.com/repos/fireph/TwitchDropsMiner/compare/${prev_commit}...${new_commit}")
+            "https://api.github.com/repos/kLandor4/TwitchDropsMiner/compare/${prev_commit}...${new_commit}")
 
           commits=$(echo "$compare_info" \
-            | jq -r '.commits[]? | "- fireph/TwitchDropsMiner@" + .sha + ": " + (.commit.message | split("\n")[0])' 2>/dev/null || echo "")
+            | jq -r '.commits[]? | "- kLandor4/TwitchDropsMiner@" + .sha + ": " + (.commit.message | split("\n")[0])' 2>/dev/null || echo "")
 
           if [ -z "$commits" ]; then
             commits="- No new commits since last release"
@@ -115,7 +115,7 @@ jobs:
           cat > /tmp/release_notes.md <<EOF
           Updated Twitch Drops Miner to v${{ steps.update-dockerfile.outputs.new_version }}
 
-          Reference commit: https://github.com/fireph/TwitchDropsMiner/commit/${{ steps.get-release.outputs.full_commit_hash }}
+          Reference commit: https://github.com/kLandor4/TwitchDropsMiner/commit/${{ steps.get-release.outputs.full_commit_hash }}
 
           Docker image at: https://hub.docker.com/r/dungfu/twitch-drops-miner
 
