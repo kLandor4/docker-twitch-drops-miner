@@ -15,7 +15,7 @@ RUN apk add --no-cache ca-certificates wget unzip && \
 # Final image
 FROM jlesage/baseimage-gui:alpine-3.23-v4
 
-LABEL maintainer="kLandor4
+LABEL maintainer="kLandor4"
 
 # Environment
 ENV ENABLE_CJK_FONT=1
