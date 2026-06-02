@@ -21,7 +21,7 @@ LABEL maintainer="kLandor4"
 ENV ENABLE_CJK_FONT=1
 ENV DARK_MODE=1
 ENV KEEP_APP_RUNNING=1
-ENV TDM_VERSION_TAG=16.dev.7ce81f0
+ENV TDM_VERSION_TAG=16.dev.38cf4ff
 ENV APP_ICON_URL=https://raw.githubusercontent.com/DevilXD/TwitchDropsMiner/master/appimage/pickaxe.png
 
 # Copy fonts needed for emojis
