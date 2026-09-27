@@ -18,7 +18,7 @@ FROM alpine:latest
 LABEL maintainer="kLandor4"
 
 # Environment
-ENV TDM_VERSION_TAG=16.dev.c6d05fa
+ENV TDM_VERSION_TAG=16.dev.0a3d7cc
 ENV UI_BACKEND=nicegui
 
 # Install runtime dependencies
